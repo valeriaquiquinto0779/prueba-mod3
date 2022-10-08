@@ -6,9 +6,9 @@ import { getClima } from '../../service';
 import './CardCreation.css';
 
 const CardCreation = () => {
-  <h1>CardCreation</h1>
-  const { location, setLocation } = useContext(LocationContext) //context
-  const navigate = useNavigate()
+  const { tarjeta, setTarjeta } = useContext(LocationContext) //context
+  const navigate = useNavigate();
+  const urlImage = "https://tse4.mm.bing.net/th?id=OIP.GsThrr3bJH2T4zlTK-8eEQHaEK&pid=Api&P=0";
 
   const {
     register,
@@ -19,54 +19,30 @@ const CardCreation = () => {
      }
   });
 
-  let getAux = (formData) => {
-    getClima(formData.locationlatitude,formData.locationlongitude)
-    .then((data) => {
-      //setLocation(data)
-      //console.log("estos viene de la api", data)
-    
-      const locationNew = {
-        id: location.length + 1,
-        name: formData.locationName,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        temperature: data.current_weather.temperature,
-        windspeed: data.current_weather.windspeed,
-        liked: false,
-      };
-      setLocation([...location, locationNew])
-    }) 
-    .catch((err) => console.log(err));  
-  };
-
   const onSubmit = (data) =>{
     //console.log("esto es longitud; "+JSON.stringify(data));
     getAux(data);
     navigate('/')
   };
-  
-  // const onSubmit = (data) => {
-  //   /* Api */
-  //   console.log("esto es longitud; "+JSON.stringify(data));
-  //   getClima(data.locationlatitud,data.locationlongitud)
-  //   .then((data) => {
-  //     setLocation(data)
-  //     console.log(data)
-  //   }) 
-  //   .catch((err) => console.log(err));
 
-  //   console.log(data);
-  //   const locationNew = {
-  //     id: location.length + 1,
-  //     name: data.locationName,
-  //     latitude: data.locationlatitude,
-  //     longitude: data.locationlongitude,
-  //     //liked: false,
-  //   }
-
-  //   setLocation([...location, locationNew])
-  //   navigate('/')
-  // }
+  let getAux = (formData) => {
+    getClima(formData.locationlatitude,formData.locationlongitude)
+    .then((data) => {
+      const locationNew = {
+        id: tarjeta.length + 1,
+        name: formData.locationName,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        temperature: data.current_weather.temperature,
+        windspeed: data.current_weather.windspeed,
+        image: urlImage,
+        liked: false,
+      };
+      setTarjeta([...tarjeta, locationNew])
+      navigate('/')
+    }) 
+    .catch((err) => console.log(err));  
+  };
 
   return (
     <div className='location-new-container'>
@@ -97,7 +73,6 @@ const CardCreation = () => {
           })}
         />
         <p>{errors.locationlongitude?.message}</p>
-        
         <button className='btn-form' type='submit'>
           Crear Ubicación
         </button>

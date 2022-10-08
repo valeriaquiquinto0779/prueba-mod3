@@ -22,10 +22,19 @@
   .location-display-latitude {
     margin-bottom: 10px;
   }
+  
   .location-display-longitude {
     margin-bottom: 10px;
   }
+
+  .location-display-temperature {
+    margin-bottom: 10px;
+  }
   
+  .location-display-windspeed {
+    margin-bottom: 10px;
+  }
+
   .hex-code-d {
     font-size: 18px;
     border-radius: 10px;

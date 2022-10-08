@@ -9,6 +9,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate()
 
+  /* Local Storage */
   const onSubmit = (data) => {
     localStorage.setItem('currentUser', JSON.stringify(data))
     setCurrentUser(data)

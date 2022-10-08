@@ -1,60 +1,43 @@
 import { GoTrashcan } from "react-icons/go";
-import { useContext, useState } from 'react';
-import { EliminarContext } from '../../contexts/EliminarContext';
+import { useEffect, useContext, useState } from 'react';
+import { LocationContext } from '../../contexts/LocationContext';
 import { Link } from 'react-router-dom';
 import './location.css';
 
 const Location = ({ location }) => {  
-  const {id, name, latitude, longitude, temperature, windspeed, liked } = location
-  const {eliminar, setEliminar } = useContext(EliminarContext);
-  const [isUbicacion, setIsUbicacion] = useState(liked);
-      
-  //TODO tienes que modificar el like en la paleta
-  const handleLocation = () => {
-    setIsUbicacion((isUbicacion) => !isUbicacion);
-      
-    //busco si la paleta ya esta en favoritos
-    //const foundIndex = eliminar.findIndex(loc => loc.id === id);
-      
-    // //para agregar a favoritos
-    // if (foundIndex === -1) {
-    //   //setFavorites([...favorites, palette])
-    //   //return
-    //   setUbicacion(
-    //   ubicacion.filter((loc) => loc.id !== id )//!==
-    //   );
-    //   return
-    // };
-    // }
-    //Quitar de favoritos
-      setEliminar(
-        eliminar.filter((loc) => loc.id !== id )//!==
-      );
-    }
-  
+  const {id, name, latitude, longitude, temperature, windspeed, image, liked } = location
+  const {tarjeta, setTarjeta} = useContext (LocationContext);
+  const [isEliminar, setIsEliminar] = useState(liked); 
 
-  const copyToClipboard = (value) => {
-    navigator.clipboard.writeText(value)
+  /* Eliminar tarjeta */
+  const handleLocation = () => {
+    setIsEliminar((isEliminar) => !isEliminar); //cambio estado de false a true
+    
+    //Quitar tarjeta
+    setTarjeta(tarjeta.filter((loc) => loc.id !== id )//!==
+    )   
   }
   
   return (
     <div className='location-container'>
+      <div className='location-tarjeta'>Tarjeta: {id}</div>
       <div className='location'>
-        <h3><span>Orden: {id}</span></h3>
         <h3><span>Lugar: {name}</span></h3>
         <h3><span>Latitud: {latitude}</span></h3>
         <h3><span>Longitud: {longitude}</span></h3>
         <h3><span>Temperatura: {temperature}</span></h3>
         <h3><span>Velocidad del Viento: {windspeed}</span></h3>
-
+        <div>
+          <img className="url-image" src={image} alt=""/>
+        </div>
       </div>
       <div className='location-actions'>
         <Link className='btn-see-more' to={`/location/${id}`}>
           Ver más
         </Link>
-        <div className='fav' onClick={handleLocation}>
-          {isUbicacion ? (
-            <GoTrashcan className='heart'/>
+        <div className='del' onClick={handleLocation}>
+          {isEliminar ? (
+            <GoTrashcan/>
           ) : (
             <GoTrashcan/>
           )}

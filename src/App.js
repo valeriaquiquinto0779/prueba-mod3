@@ -9,32 +9,15 @@ import CardCreation from './routes/Card/CardCreation';
 import Navigation from './routes/Navigation/Navigation';
 import Login from './routes/Login/Login';
 
-function App() {
-  
-  //const { setListCard } = useContext(LocationContext);
-  //const [listCard, setListCard] = useState([]);
-  //const [latitud, setLatitud] = useState('-24.196360');
-  //const [longitud, setLongitud] = useState('-65.302191');
-
-  //useEffect(() => {
-    //setLatitud('-24.196360')
-    //setLongitud('-65.302191')
-    //getClima(latitud,longitud)
-      //.then((data) => {
-        //setListCard(data)
-        //console.log(data)
-      //}) 
-      //.catch((err) => console.log(err));
-  //}, []);
-
+function App() {  
   return ( 
     <div className='App'>
       <Routes>
         <Route path='/' element={<Navigation/>}> 
-          <Route path='login' element={<Login/>}/>
           <Route index element={<Home/>}/>
-          <Route path='location/create' element={<CardCreation/>}/>
-          <Route path='location/:id' element={<CardDisplay/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/location/create' element={<CardCreation/>}/>
+          <Route path='/location/:id' element={<CardDisplay/>}/>
         </Route>
       </Routes>
     </div>

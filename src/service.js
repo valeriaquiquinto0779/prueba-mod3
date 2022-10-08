@@ -6,12 +6,3 @@ export const getClima = async (latitude, longitude) => {
         throw new Error('could not fetch clima');
     }
 };
-
-/* export const getTags = async () => {
-    try {
-        const response = await fetch(`${SERVER_DOMAIN}/tags`);
-        return response.json();
-    } catch {
-        throw new Error('could not fetch tags');
-    }
-}; */

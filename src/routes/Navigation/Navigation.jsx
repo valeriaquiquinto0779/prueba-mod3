@@ -7,6 +7,7 @@ import './Navigation.css';
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
+   /* Local Storage */
   useEffect(() => {
     const userStored = localStorage.getItem('currentUser')
     console.log({userStored})
@@ -45,7 +46,7 @@ const Navigation = () => {
         )}
       </div>
     </div>
-    <Outlet />
+    <Outlet/>
   </>
 );
 };
